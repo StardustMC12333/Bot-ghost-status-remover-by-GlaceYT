@@ -1,33 +1,9 @@
-/*
-
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-                                                 
-  _________ ___ ___ ._______   _________    
- /   _____//   |   \|   \   \ /   /  _  \   
- \_____  \/    ~    \   |\   Y   /  /_\  \  
- /        \    Y    /   | \     /    |    \ 
-/_______  /\___|_  /|___|  \___/\____|__  / 
-        \/       \/                     \/  
-                    
-DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
-YouTube : https://www.youtube.com/@GlaceYT                         
-                                                                       
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-
-
-*/
-const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
-require('dotenv').config();
 const express = require('express');
 const path = require('path');
-
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds
-  ],
-});
-
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const app = express();
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
 const port = 3000;
 app.get('/', (req, res) => {
   const imagePath = path.join(__dirname, 'index.html');
@@ -37,8 +13,8 @@ app.listen(port, () => {
   console.log('\x1b[36m[ SERVER ]\x1b[0m', '\x1b[32m SH : http://localhost:' + port + ' ✅\x1b[0m');
 });
 
-const statusMessages = ["Play.grindhousemc.nl"];
-const statusTypes = [ 'dnd';
+const statusMessages = ["play.grindhousemc.nl"];
+const statusTypes = ['dnd']; // Changed from `[` to correct array syntax
 let currentStatusIndex = 0;
 let currentTypeIndex = 0;
 
@@ -58,7 +34,7 @@ function updateStatus() {
   const currentStatus = statusMessages[currentStatusIndex];
   const currentType = statusTypes[currentTypeIndex];
   client.user.setPresence({
-    activities: [{ name: currentStatus, type: ActivityType.Custom }],
+    activities: [{ name: currentStatus, type: ActivityType.Playing }], // Updated type to Playing
     status: currentType,
   });
   console.log('\x1b[33m[ STATUS ]\x1b[0m', `Updated status to: ${currentStatus} (${currentType})`);
@@ -80,23 +56,3 @@ client.once('ready', () => {
 });
 
 login();
-
-  
-/*
-
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-                                                 
-  _________ ___ ___ ._______   _________    
- /   _____//   |   \|   \   \ /   /  _  \   
- \_____  \/    ~    \   |\   Y   /  /_\  \  
- /        \    Y    /   | \     /    |    \ 
-/_______  /\___|_  /|___|  \___/\____|__  / 
-        \/       \/                     \/  
-                    
-DISCORD :  https://discord.com/invite/xQF9f9yUEM                   
-YouTube : https://www.youtube.com/@GlaceYT                         
-                                                                       
-☆.。.:*・°☆.。.:*・°☆.。.:*・°☆.。.:*・°☆
-
-
-*/
